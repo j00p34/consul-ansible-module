@@ -46,6 +46,10 @@ options:
       - Consul host
     required: true
     default: 127.0.0.1
+  name:
+    description:
+      - Name of event to fire
+    required: false
   port:
     description:
       - Consul API port
