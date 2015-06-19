@@ -50,10 +50,22 @@ options:
     description:
       - Name of event to fire
     required: false
+  node:
+    description:
+      - Node query filter for event fire
+    required: false
   port:
     description:
       - Consul API port
     required: true
+  service:
+    description:
+      - Service query filter for event fire
+    required: false
+  tag:
+    description:
+      - Tag query filter for event fire
+    required: false
   version:
     description:
       - Consul API version
@@ -81,6 +93,7 @@ class ConsulEvent(object):
 
     ALLOWED_ACTIONS = ['fire', 'list']
     FIRE, LIST = ALLOWED_ACTIONS
+    FIRE_PARAMS = ['node', 'service', 'tag']
 
     def __init__(self, module):
         """Takes an AnsibleModule object to set up Consul Event interaction"""
@@ -152,7 +165,10 @@ def main():
             dc=dict(required=False, default='dc1'),
             host=dict(required=False, default='127.0.0.1'),
             name=dict(required=False, default=''),
+            node=dict(required=False, default=''),
             port=dict(require=False, default=8500),
+            service=dict(required=False, default=''),
+            tag=dict(required=False, default=''),
             version=dict(required=False, default='v1'),
         ),
         supports_check_mode=True
