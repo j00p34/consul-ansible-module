@@ -5,7 +5,8 @@
 set -ev
 
 CONSUL_VER=0.5.2
-CONSUL_DL_URL=https://dl.bintray.com/mitchellh/consul/${CONSUL_VER}_linux_amd64.zip
+OS_NAME=`uname -s | awk '{print tolower($0)}'`
+CONSUL_DL_URL=https://dl.bintray.com/mitchellh/consul/${CONSUL_VER}_${OS_NAME}_amd64.zip
 
 curl -L $CONSUL_DL_URL > consul.zip
 unzip -o consul.zip -d $PWD/bin/
